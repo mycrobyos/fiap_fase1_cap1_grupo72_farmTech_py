@@ -21,7 +21,7 @@ def adicionar_parcela():
             "comprimento_m": entrada_float("Comprimento do talhão (m): ", 0),
             "raio_m": 0.0
         })
-    elif cultura == "Soja":  # Soja
+    elif cultura == "Cana":  # cana
         reg.update({
             "raio_m": entrada_float("Raio do pivô (m): ", 0),
             "largura_m": 0.0, "comprimento_m": 0.0
@@ -72,14 +72,14 @@ def atualizar_parcela():
     p = parcelas[idx]
     print(f"\nAtualizando parcela ID {p['id']} ({p['cultura']})")
 
-    # Café -> largura/comprimento | Soja -> raio
+    # Café -> largura/comprimento | cana -> raio
     if p["cultura"] == "Café":
         novo = entrada_float(f"Largura (m) [{p['largura_m']}]: ")
         if novo: p["largura_m"] = novo
 
         novo = entrada_float(f"Comprimento (m) [{p['comprimento_m']}]: ")
         if novo: p["comprimento_m"] = novo
-    elif p["cultura"] == "Soja":
+    elif p["cultura"] == "Cana":
         novo = entrada_float(f"Raio (m) [{p['raio_m']}]: ")
         if novo: p["raio_m"] = novo
 
@@ -127,8 +127,8 @@ def deletar_parcela():
 
 
 def escolher_cultura():
-    print("\nEscolha a cultura:\n1) Café (área = largura x comprimento)\n2) Soja (área = π r²)")
-    return "Café" if entrada_int("Opção: ", 1, 2) == 1 else "Soja"
+    print("\nEscolha a cultura:\n1) Café (área = largura x comprimento)\n2) cana (área = π r²)")
+    return "Café" if entrada_int("Opção: ", 1, 2) == 1 else "Cana"
 
 
 def exportar_csv(caminho="parcelas.csv"):
@@ -150,9 +150,9 @@ def calcular_insumo_litros(p): return (p["dose_ml_m"]*p["comp_rua_m"]*p["num_rua
 
 def calcular_areas_por_cultura():
     tot_cafe = sum(p["area_m2"] for p in parcelas if p["cultura"]=="Café")
-    tot_soja = sum(p["area_m2"] for p in parcelas if p["cultura"]=="Soja")
+    tot_cana = sum(p["area_m2"] for p in parcelas if p["cultura"]=="Cana")
     print("\n--- ÁREA POR CULTURA (m²) ---")
-    print(f"Café: {tot_cafe:.2f}\nSoja: {tot_soja:.2f}\nTOTAL: {tot_cafe+tot_soja:.2f}")
+    print(f"Café: {tot_cafe:.2f}\ncana: {tot_cana:.2f}\nTOTAL: {tot_cafe+tot_cana:.2f}")
 
 def calcular_insumos():
     if not parcelas: print("\nNenhuma parcela cadastrada."); return
