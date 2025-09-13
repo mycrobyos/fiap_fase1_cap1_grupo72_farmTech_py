@@ -5,7 +5,7 @@ import csv
 # "Banco de dados" em VETORES
 # ---------------------------
 parcelas = []  # lista principal
-ids, culturas, areas, insumos_litros = [], [], [], []  # vetores auxiliares
+ids, culturas, areas, insumos_litros = [], [], [], []  # vetores auxiliares.
 
 
 # ---------------------------
